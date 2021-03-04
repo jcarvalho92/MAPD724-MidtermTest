@@ -27,12 +27,22 @@ class GameViewController: UIViewController
         }
         
         CollisionManager.gameViewController = self
+        OrientationManager.Portrait = true
         ScoreManager.Score = 0
         ScoreManager.Lives = 5
         updateLivesLabel()
         updateScoreLabel()
         
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+            super.viewWillTransition(to: size, with: coordinator)
+            if UIDevice.current.orientation.isLandscape {
+                OrientationManager.Portrait = false
+            } else {
+                OrientationManager.Portrait = true
+            }
+        }
 
     override var shouldAutorotate: Bool
     {
