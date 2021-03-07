@@ -1,3 +1,8 @@
+//  File: Ocean.swift
+//  Created by Juliana de Carvalho
+//  Student Id: 301137060
+//  Date: March 7, 2021
+
 import SpriteKit
 import GameplayKit
 
@@ -7,7 +12,7 @@ class Ocean: GameObject
     // constructor
     init()
     {
-        super.init(imageString: "ocean", initialScale: 2.0)
+        super.init(imageString: "ocean", initialScale: PositionManager.oceanScale)
         Start()
     }
     
@@ -19,7 +24,9 @@ class Ocean: GameObject
     
     override func CheckBounds()
     {
-        if(position.y <= -773)
+
+        if( (OrientationManager.Portrait && position.y <= PositionManager.oceanCGFloat * -1) ||
+            (!OrientationManager.Portrait && position.x <= PositionManager.oceanCGFloat * -1))
         {
             Reset()
         }
@@ -27,14 +34,27 @@ class Ocean: GameObject
     
     override func Reset()
     {
-        position.y = 773
+        if(OrientationManager.Portrait){
+            position.y = PositionManager.oceanCGFloat
+        }
+        else{
+            position.x = PositionManager.oceanCGFloat
+        }
     }
     
     // initialization
     override func Start()
     {
-        zPosition = 0
-        dy = 5.0
+        zPosition = PositionManager.oceanZposition
+        
+        if(OrientationManager.Portrait){
+            dy = PositionManager.d
+        }
+        else{
+            dx = PositionManager.d
+
+        }
+        
     }
     
     override func Update()
@@ -45,6 +65,12 @@ class Ocean: GameObject
     
     func Move()
     {
-        position.y -= dy!
+        if(OrientationManager.Portrait){
+            position.y -= dy!
+        }
+        else{
+            position.x -= dx!
+        }
+        
     }
 }

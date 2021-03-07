@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C8E97CD125F1425C00151EE2 /* OrientationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E97CD025F1425C00151EE2 /* OrientationManager.swift */; };
+		C8E97CD425F146A600151EE2 /* PositionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E97CD325F146A600151EE2 /* PositionManager.swift */; };
 		E9728E0F25F03E2D000FED64 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9728E0E25F03E2D000FED64 /* ScoreManager.swift */; };
 		E9728E1225F0408A000FED64 /* engine.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E9728E1125F04089000FED64 /* engine.mp3 */; };
 		E9728E1525F04096000FED64 /* thunder.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E9728E1425F04096000FED64 /* thunder.mp3 */; };
@@ -85,6 +86,7 @@
 
 /* Begin PBXFileReference section */
 		C8E97CD025F1425C00151EE2 /* OrientationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationManager.swift; sourceTree = "<group>"; };
+		C8E97CD325F146A600151EE2 /* PositionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionManager.swift; sourceTree = "<group>"; };
 		E9728E0E25F03E2D000FED64 /* ScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
 		E9728E1125F04089000FED64 /* engine.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = engine.mp3; sourceTree = "<group>"; };
 		E9728E1425F04096000FED64 /* thunder.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = thunder.mp3; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				E9DACEC225E74B3A00895099 /* CollisionManager.swift */,
 				E9728E0E25F03E2D000FED64 /* ScoreManager.swift */,
 				C8E97CD025F1425C00151EE2 /* OrientationManager.swift */,
+				C8E97CD325F146A600151EE2 /* PositionManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8E97CD425F146A600151EE2 /* PositionManager.swift in Sources */,
 				E9DACE2825E71DDB00895099 /* GameScene.swift in Sources */,
 				E9DACEBF25E7462100895099 /* Plane.swift in Sources */,
 				C8E97CD125F1425C00151EE2 /* OrientationManager.swift in Sources */,

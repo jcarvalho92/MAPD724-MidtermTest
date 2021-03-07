@@ -1,3 +1,8 @@
+//  File: Cloud.swift
+//  Created by Juliana de Carvalho
+//  Student Id: 301137060
+//  Date: March 7, 2021
+
 import SpriteKit
 import GameplayKit
 
@@ -7,7 +12,7 @@ class Cloud: GameObject
     // constructor
     init()
     {
-        super.init(imageString: "cloud", initialScale: 1.0)
+        super.init(imageString: "cloud", initialScale: PositionManager.cloudScale)
         Start()
     }
     
@@ -19,7 +24,9 @@ class Cloud: GameObject
     
     override func CheckBounds()
     {
-        if(position.y <= -756)
+        
+        if( (OrientationManager.Portrait && position.y <= PositionManager.cloudCGFloat * -1) ||
+            (!OrientationManager.Portrait && position.x <= PositionManager.cloudCGFloat * -1))
         {
             Reset()
         }
@@ -27,15 +34,32 @@ class Cloud: GameObject
     
     override func Reset()
     {
-        dy = CGFloat((randomSource?.nextUniform())! * 5.0) + 5.0
-        dx = CGFloat((randomSource?.nextUniform())! * -4.0) + 2.0
         
-        // get a pseudo-random number from -262 to 262 =
-        let randomX:Int = (randomSource?.nextInt(upperBound: 524))! - 262
-        position.x = CGFloat(randomX)
-        
-        let randomY:Int = (randomSource?.nextInt(upperBound: 10))! + 756
-        position.y = CGFloat(randomY)
+        if(OrientationManager.Portrait){
+            dy = CGFloat((randomSource?.nextUniform())! * Float(PositionManager.d)) + PositionManager.d
+            dx = CGFloat((randomSource?.nextUniform())! * Float(PositionManager.dRandomFrom)) + PositionManager.dRandomTo
+            
+            // get a pseudo-random number
+            let randomX:Int = (randomSource?.nextInt(upperBound: PositionManager.cloudBound * 2))! - PositionManager.cloudBound
+            position.x = CGFloat(randomX)
+            
+            let randomY:Int = (randomSource?.nextInt(upperBound: PositionManager.cloudUpperBound))! + Int(PositionManager.cloudCGFloat)
+            position.y = CGFloat(randomY)
+            
+        }
+        else{
+            dx = CGFloat((randomSource?.nextUniform())! * Float(PositionManager.d)) + PositionManager.d
+            dy = CGFloat((randomSource?.nextUniform())! * Float(PositionManager.dRandomFrom)) + PositionManager.dRandomTo
+            
+            // get a pseudo-random number 
+            let randomY:Int = (randomSource?.nextInt(upperBound: PositionManager.cloudBound * 2))! - PositionManager.cloudBound
+            position.y = CGFloat(randomY)
+            
+            let randomX:Int = (randomSource?.nextInt(upperBound: PositionManager.cloudUpperBound))! + Int(PositionManager.cloudCGFloat)
+            position.x = CGFloat(randomX)
+            
+        }
+
         
         isColliding = false
     }
@@ -43,9 +67,11 @@ class Cloud: GameObject
     // initialization
     override func Start()
     {
-        zPosition = 3
-        alpha = 0.5
+        zPosition = PositionManager.cloudZposition
+        alpha = PositionManager.alpha
         Reset()
+        
+        
     }
     
     override func Update()
@@ -56,7 +82,12 @@ class Cloud: GameObject
     
     func Move()
     {
-        position.y -= dy!
-        position.x -= dx!
+
+        if(OrientationManager.Portrait){
+            position.y -= dy!
+        }
+        else{
+            position.x -= dx!
+        }
     }
 }

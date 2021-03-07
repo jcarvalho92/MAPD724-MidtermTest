@@ -1,3 +1,8 @@
+//  File: GameViewController.swift
+//  Created by Juliana de Carvalho
+//  Student Id: 301137060
+//  Date: March 7, 2021
+
 import UIKit
 import SpriteKit
 import GameplayKit
@@ -11,23 +16,26 @@ class GameViewController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
-                
+               
+                if( !OrientationManager.Portrait ){
+                    scene.size = CGSize(width: scene.frame.height, height: scene.frame.width)
+                }
+
                 // Present the scene
                 view.presentScene(scene)
             }
             
             view.ignoresSiblingOrder = true
-            
         }
         
         CollisionManager.gameViewController = self
-        OrientationManager.Portrait = true
+
         ScoreManager.Score = 0
         ScoreManager.Lives = 5
         updateLivesLabel()
@@ -42,6 +50,7 @@ class GameViewController: UIViewController
             } else {
                 OrientationManager.Portrait = true
             }
+            viewDidLoad()
         }
 
     override var shouldAutorotate: Bool

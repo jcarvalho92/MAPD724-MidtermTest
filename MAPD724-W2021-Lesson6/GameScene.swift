@@ -1,3 +1,8 @@
+//  File: GameScene.swift
+//  Created by Juliana de Carvalho
+//  Student Id: 301137060
+//  Date: March 7, 2021
+
 import UIKit
 import AVFoundation
 import SpriteKit
@@ -20,12 +25,17 @@ class GameScene: SKScene
     {
         screenWidth = frame.width
         screenHeight = frame.height
-        
+
         name = "GAME"
         
         // add ocean to the scene
         ocean = Ocean() // allocate memory
-        ocean?.position = CGPoint(x: 0, y: 773)
+        ocean?.position = PositionManager.GetOceanPosition()
+      
+        if(!OrientationManager.Portrait){
+            ocean?.zRotation =  .pi / 2
+        }
+        
         addChild(ocean!) // add object to the scene
         
         // add island to the scene
@@ -34,10 +44,14 @@ class GameScene: SKScene
         
         // add plane to the scene
         plane = Plane()
-        plane?.position = CGPoint(x: 0, y: -495)
+        plane?.position = PositionManager.GetPlanePosition()
+        if(!OrientationManager.Portrait){
+            plane?.zRotation =  3 * .pi / 2
+        }
+  
         addChild(plane!)
         
-        // add 3 clouds to the scene
+        // add 2 clouds to the scene
         for index in 0...1
         {
             let cloud: Cloud = Cloud()
@@ -67,18 +81,18 @@ class GameScene: SKScene
     
     func touchDown(atPoint pos : CGPoint)
     {
-        plane?.TouchMove(newPos: CGPoint(x: pos.x, y: -495))
+        plane?.TouchMove(newPos: PositionManager.GetPlaneTouchMove(atPoint: pos))
     }
     
     func touchMoved(toPoint pos : CGPoint)
     {
-        plane?.TouchMove(newPos: CGPoint(x: pos.x, y: -495))
+        plane?.TouchMove(newPos: PositionManager.GetPlaneTouchMove(atPoint: pos))
 
     }
     
     func touchUp(atPoint pos : CGPoint)
     {
-        plane?.TouchMove(newPos: CGPoint(x: pos.x, y: -495))
+        plane?.TouchMove(newPos: PositionManager.GetPlaneTouchMove(atPoint: pos))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)

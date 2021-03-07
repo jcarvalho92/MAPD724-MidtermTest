@@ -1,3 +1,8 @@
+//  File: Plane.swift
+//  Created by Juliana de Carvalho
+//  Student Id: 301137060
+//  Date: March 7, 2021
+
 import SpriteKit
 import GameplayKit
 
@@ -7,7 +12,7 @@ class Plane: GameObject
     // constructor
     init()
     {
-        super.init(imageString: "plane", initialScale: 2.0)
+        super.init(imageString: "plane", initialScale: PositionManager.planeScale)
         Start()
     }
     
@@ -19,18 +24,30 @@ class Plane: GameObject
     
     override func CheckBounds()
     {
-        // constrain on the left - left boundary
-        if(position.x <= -310)
-        {
-            position.x = -310
+        if(OrientationManager.Portrait){
+            // constrain on the left - left boundary
+            if(position.x <= PositionManager.planeLeftBound)
+            {
+                position.x = PositionManager.planeLeftBound
+            }
+            // constrain on the right - right boundary
+            if(position.x >= PositionManager.planeRightBound)
+            {
+                position.x = PositionManager.planeRightBound
+            }
         }
-        
-        // constrain on the right - right boundary
-        if(position.x >= 310)
-        {
-            position.x = 310
+        else{
+            // constrain on the left - left boundary
+            if(position.y <= PositionManager.planeLeftBound)
+            {
+                position.y = PositionManager.planeLeftBound
+            }
+            // constrain on the right - right boundary
+            if(position.y >= PositionManager.planeRightBound)
+            {
+                position.y = PositionManager.planeRightBound
+            }
         }
-        
     }
     
     override func Reset()
@@ -41,7 +58,7 @@ class Plane: GameObject
     // initialization
     override func Start()
     {
-        zPosition = 2
+        zPosition = PositionManager.planeZposition
     }
     
     override func Update()
